@@ -1,10 +1,10 @@
 #include <stdio.h>
-int coeficientes (int x, int y, int quocientes[], int i){
+int coeficientes (int quocientes[], int i){
     int matriz_st [100];
     int novo_anterior = 0; //antepenultimo st
     int anterior = 1; //penultimo st
     int contador = 0;
-    int i_inicial = i+1; //porque array tem 1 posição a menos (por causa do 0)
+    int i_inicial = i; 
     int st;
 
     for (i; i >= 0; i--){
@@ -13,53 +13,60 @@ int coeficientes (int x, int y, int quocientes[], int i){
         
         novo_anterior = anterior;
         anterior = st;
-        
-        printf("matriz %d: %d\n", contador,  matriz_st[contador]);
 
         contador += 1;
     }
 
     if (i_inicial%2 == 0){
-        printf("%d %d\n", matriz_st[contador-1], -matriz_st[contador-2]);
+        printf("s:%d t:-%d\n", matriz_st[contador-2], matriz_st[contador-1]);
     } 
     else{
-        printf("%d %d\n", -matriz_st[contador-1], matriz_st[contador-2]);
+        printf("s:-%d  t:%d\n", matriz_st[contador-2], matriz_st[contador-1]);
     }
 }
 
 int calcula_mdc(int x, int y, int quocientes[]){ 
     int resto, q;
     int i = 0;
-
+    
     for (resto = 1; resto > 0; i++){     
-        q = y/x;      
+        q = x/y;      
         quocientes[i] = q;
-        printf("divisao(%d, %d) = %.d\n", x, y, quocientes[i]);    
-    
-        resto = y%x;
-        y  = x;
-        x = resto; 
+        resto = x%y;
 
+        x  = y;
+        y = resto; 
     }
-    
-    coeficientes(x, y, quocientes, (i-2));
 
-    return y;
+    coeficientes(quocientes, i);    
+    return x;
 }
 
-int main(){
-    int n1, n2, mdc;
+int verifica_numeros(int n1, int n2){
+    int mdc;
     int quocientes[100];
-    
-    printf("digite dois numeros:");
-    scanf("%d%d", &n1, &n2);
 
-    if(n1 > n2){
-        mdc = calcula_mdc (n2, n1, quocientes);    
-    }
+    if (n1 == 0){
+        mdc = n2;
+        coeficientes(quocientes, 1); // 1 pra entrar na segunda condição (contador = 2)
+    }  
+    else if (n2 == 0){
+        mdc = n1;
+        coeficientes(quocientes, 2); // 2 pra entrar na primeira condição (contador = 3)
+    }  
     else{
         mdc = calcula_mdc(n1, n2, quocientes);
     } 
-    printf("mdc(%d, %d): %d\n", n1, n2, mdc);
+
+    return mdc;
+}
+
+int main(){
+    int n1, n2;
+    
+    printf("digite dois numeros:");
+    scanf("%d%d", &n1, &n2);
+   
+    printf("mdc = %d\n", verifica_numeros(n1, n2)); //verifica numeros vai distribuir os casos de n1 e n2 entre as funções 
     return 0;
 }
