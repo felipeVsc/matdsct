@@ -1,6 +1,7 @@
 #include <stdio.h>
-int eh_primo(int numero, int contador){
-    
+int eh_primo(int numero){
+    int contador = 2;
+
     if (numero == 0 || numero == 1){
         return 0;
     }
@@ -17,12 +18,10 @@ int eh_primo(int numero, int contador){
 
 int main (){
     int numero, resultado;
-    int contador = 2;
     
-    printf("digite um numero:");
     scanf("%d", &numero);   
     
-    resultado = eh_primo(numero, contador);    
+    resultado = eh_primo(numero);    
 
     if (resultado == 1){
         printf("eh primo\n");
