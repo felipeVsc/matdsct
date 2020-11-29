@@ -6,43 +6,45 @@ falta fazer para que seja com n entrada e nao apenas 3
 */
 
 int* pegarEntrada(){
-    int listaRx[10] = {};
-    int listaMx[10] = {};
-    static int matriz[10][10] = {{},{}};
-    for(int cont = 0;cont<=3;cont++){
-        scanf("%d %d",&listaRx[cont],&listaMx[cont]);
+    int n;
+    scanf("%d\n",&n);
+    int listaRx[n] = {};
+    int listaMx[n] = {};
+    static int matriz[n][n] = {{},{}};
+    for(int cont = 0;cont<=n;cont++){
+        scanf("%d %d\n",&listaRx[cont],&listaMx[cont]);
     }
-    for(int teste = 0; teste<=10,teste++){
+    for(int teste = 0; teste<=n,teste++){
         matriz[teste][0] = listaRx[teste];
         matriz[teste][1] = listaMx[teste];
     }
 
     return matriz;
 }
-int multiplicaM(int listaMx[]){
+int multiplicaM(int listaMx[], int tamanho){
     // maitrz m[x][0 = r1 e m[x][1] = m1
     
     int mzao = 1;
-    for(int z=0;z<=3;z++){
+    for(int z=0;z<tamanho;z++){
         mzao=mzao*listaMx[z];
     }
     return mzao;
 }
-int validarCoprimos(int matriz[]){
+int validarCoprimos(int matriz[],int tamanho){
     // peguei a matriz, quero destrinchar
-    int listaRx[10] = {};
-    int listaMx[10] = {};
+    int listaRx[tamanho] = {};
+    int listaMx[tamanho] = {};
     
-    for(int teste = 0; teste<=10,teste++){
+    for(int desmonte = 0; desmonte<tamanho,desmonte++){
         
-        listaRx[teste] = matriz[teste][0];
+        listaRx[desmonte] = matriz[desmonte][0];
         
-        listaMx[teste] = matriz[teste][1]; 
+        listaMx[desmonte] = matriz[desmonte][1]; 
     }
 
     int qntdCoprimos = 0;
-    for(int x=0; x<sizeof(listaMx);x++){
-        for(int z=0;z<sizeof(listaMx);z++){
+    for(int x=0; x<tamanho;x++){
+        for(int z=0;z<tamanho;z++){
             if (calculomdc(listaMx[x],listaMx[y])!=1 && listaMx[x]!=listaMx[y]){
                 break;
             }
@@ -51,8 +53,8 @@ int validarCoprimos(int matriz[]){
             }
         }
     }
-    if(qntdCoprimo==pow(sizeof(listaMx),2){
-        return multiplicaM(listaMx);
+    if(qntdCoprimo==pow(tamanho,2){
+        return multiplicaM(listaMx,tamanho);
     }
     else{
         return 0;
@@ -63,19 +65,20 @@ int validarCoprimos(int matriz[]){
 int calcularTeoremaRestoChines(){
     // maitrz m[x][0 = r1 e m[x][1] = m1
     int matriz = pegarEntrada();    
-    int mzao = validarCoprimos(matriz);
-    int listaM_pequeno_x[10] = {};
-    int listaCongruencia[10] = {};
-    for(int y=0;y<=3;y++){
+    int tamanhoMatriz = sizeof(matriz);
+    int mzao = validarCoprimos(matriz,tamanhoMatriz);
+    int listaM_pequeno_x[tamanhoMatriz] = {};
+    int listaCongruencia[tamanhoMatriz] = {};
+    for(int y=0;y<tamanhoMatriz;y++){
         listaM_pequeno_x[y]=mzao/matriz[y][1];
     }
-    
-    for(int p=0; p<=3;p++){
+    // testar essa parte do <= pra ver se ta certo
+    for(int p=0; p<tamanhoMatriz;p++){
         // pasas congruencia onde listaMx[0]*x = 1 mod(matriz[0][1]) e joga o resultado na lista congruencia = 35x = 1 mod(9)
-        listaCongruencia[p] = congruencia(35,1,9);
+        //listaCongruencia[p] = congruencia(35,1,9);
     }
     int xzero = 1;
-    for(int k=0;k<=3;k++){
+    for(int k=0;k<tamanhoMatriz;k++){
         xzero = xzero+(listaM_pequeno_x[k]*listaCongruencia[k]*matriz[k][0];
     }
     return xzero%mzao;
