@@ -132,7 +132,7 @@ int mediadora (int a, int b, int m){
 
     if (mdc == 1){
         solucao = congruencia_coprimos(a, b, m, s); //1 unica solução        
-        printf("s: %d", solucao);
+        // printf("s: %d", solucao); // tirei
         return solucao;
     } 
     else{
@@ -149,7 +149,7 @@ int mediadora (int a, int b, int m){
         }        
     }    
 }
-
+/*
 int main (){
     int a,b,m;
 
@@ -158,4 +158,4 @@ int main (){
     mediadora(a, b, m);
 
     return 0;
-}
+}*/
