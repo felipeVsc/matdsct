@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-void coeficientes (int quocientes[], int contador){
+//funções copiadas da q6
+int coeficientes (int quocientes[], int contador, int mod){
     int matriz_st[100];
     int st[2];
     int c_inicial = contador;
@@ -22,11 +23,10 @@ void coeficientes (int quocientes[], int contador){
             matriz_st[i] = quocientes[contador] * s + t;
             t = s;
             s = matriz_st[i];
-            
+
             contador -= 1;
             i += 1; 
         }
-
         if(c_inicial%2 == 0){ // se contador for par, o s tem que ser negativo
             st[0] =  matriz_st[i-2] * -1; //esse é meu s
             st[1] = matriz_st[i-1]; //esse é meu t
@@ -37,14 +37,21 @@ void coeficientes (int quocientes[], int contador){
         }
     }
     
-    printf("s:%d t:%d\n", st[0], st[1]);
+    s = st[0]; 
+    if (s < 0){
+        while (s < 0 && s < mod){ //0 incluso ou nao?
+            s = s + mod;
+        }        
+    }
+    return s;
 }
 
 int calcula_mdc(int x, int y){
     int resto = 1;    
     int contador = 0;
     int quocientes[100];
-    int st;
+    int s;
+    int mod = y;
 
     while (resto > 0){       
         resto = x%y; 
@@ -59,29 +66,24 @@ int calcula_mdc(int x, int y){
             quocientes[contador] = x/y; 
             x = y;      
             y = resto;
-
             contador += 1;
         }        
     }
 
+    s = coeficientes (quocientes, contador, mod); 
 
-    coeficientes (quocientes, contador);
-    
-    return x;
+    return s; /* nessa questão retorna s e nao o mdc.
+             solução futura seria retornar um vetor com mdc e s*/
 }
 
 int main(){
-    int n1, n2, mdc;    
-    scanf("%d%d", &n1, &n2);
-    if (n2 == 0){
-        /*OBS:nao sei como fazer pra ele retonar o coeficiente certo 
-        nsse caso. quem quiser ajudar agradeço*/
-        mdc = calcula_mdc(n2,n1); 
-    }
-    else{
-        mdc = calcula_mdc(n1,n2); 
-    }
-    printf("mdc: %d\n", mdc);   
-
+    int a, mod, inverso;  
+ 
+    scanf("%d%d", &a, &mod);
+    
+    inverso = calcula_mdc(a,mod);       
+    
+    printf("inverso de %d mod %d: %d\n", a, mod, inverso);
+    
     return 0;
 }
