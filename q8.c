@@ -149,7 +149,7 @@ int mediadora (int a, int b, int m){
         }        
     }    
 }
-/*
+
 int main (){
     int a,b,m;
 
@@ -158,4 +158,4 @@ int main (){
     mediadora(a, b, m);
 
     return 0;
-}*/
+}
