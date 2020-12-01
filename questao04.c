@@ -180,5 +180,5 @@ int main()
 	int n1, n2;
 	scanf("%i %i", &n1, &n2);
 	int* resultado = calcularMdcMmc(n1, n2);
-	printf("MDC:%i\nMMC:%i\n", resultado[0], resultado[1]);
+	printf("MDC:%i\nMMC:%i\n", resultado[1], resultado[0]);
 }
