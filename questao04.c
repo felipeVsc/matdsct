@@ -2,10 +2,6 @@
 #include <math.h>
 #include <string.h>
 
-int main(){
-	return 0;
-}
-
 int* decomporPrimo(int num){
 
     /*
@@ -178,4 +174,11 @@ int* calcularMdcMmc(int num1,int num2){
 
     
 }
-    
+
+int main()
+{
+	int n1, n2;
+	scanf("%i %i", &n1, &n2);
+	int* resultado = calcularMdcMmc(n1, n2);
+	printf("MDC:%i\nMMC:%i\n", resultado[0], resultado[1]);
+}
