@@ -1,5 +1,3 @@
-# matdsct
+# Matemática Discreta - Lista de Questões
 
-Questões lista matematica discreta
-
-grupo taigo felipe emily
+Lista de Questões da disciplina de Matemática Discreta
